@@ -26,8 +26,14 @@ export const productSlice = createSlice({
   initialState: {
     products: [],
     categories: [],
+    cart: [],
   },
   reducers: {
+    addToCart: (state, action) => {
+      const cart = [];
+      cart.push(action.payload)
+      return { ...state, cart: [...state.cart, action.payload] }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
@@ -44,5 +50,7 @@ export const productSlice = createSlice({
     });
   },
 });
+
+export const { addToCart } = productSlice.actions;
 
 export default productSlice.reducer;

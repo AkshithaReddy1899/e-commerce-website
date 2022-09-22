@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts, fetchCategories, searchProducts, searchCategories } from '../feature/ProductsSlice';
+import Table from './Table';
 
 const Products = () => {
 	const dispatch = useDispatch();
@@ -25,8 +26,8 @@ const Products = () => {
 
 	const products = useSelector((state) => state.productReducer.products.products);
 	const categories = useSelector((state) => state.productReducer.categories);
-
-	console.log(products);
+  const state = useSelector((state) => state.productReducer);
+  console.log(state);
 
 	return (
 	  <div>
@@ -53,13 +54,7 @@ const Products = () => {
       </div>
       <div className="flex justify-center items-center flex-wrap flex-col">
         {
-          (products !== undefined) ?
-					products.map((item) => (
-						<div className="border w-32" key={item.id}>
-							<img src={item.images[0]} alt={item.title} />
-							<h1>{item.title}</h1>
-						</div>
-					)) : <p>No products to show</p>
+          (products !== undefined) ? <Table data={products} /> : <p className="text-center text-2xl mt-12">Loading....</p>
         }
       </div>
 		</div>
@@ -67,3 +62,13 @@ const Products = () => {
 };
 
 export default Products;
+
+/*
+(products !== undefined) ?
+					products.map((item) => (
+						<div className="border w-32" key={item.id}>
+							<img src={item.images[0]} alt={item.title} />
+							<h1>{item.title}</h1>
+						</div>
+					)) : <p>No products to show</p>
+*/
