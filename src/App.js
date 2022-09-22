@@ -5,7 +5,7 @@ import Checkout from './components/Checkout';
 
 function App() {
   return (
-    <div className="App border">
+    <div className="">
       <Nav />
       <Routes>
         <Route path="/" element={<Products />} />
