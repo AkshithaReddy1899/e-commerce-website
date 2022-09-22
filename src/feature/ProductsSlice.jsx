@@ -11,6 +11,11 @@ export const fetchCategories = createAsyncThunk('E-COMMERCE/FETCH_CATEGORIES', a
   return response.data;
 });
 
+export const searchProducts = createAsyncThunk('E-COMMERCE/SEARCH_PRODUCTS', async (search) => {
+  const response = await axios.get(`https://dummyjson.com/products/search?q=${search}`);
+  return response.data;
+});
+
 export const productSlice = createSlice({
   name: 'products',
   initialState: {
@@ -25,6 +30,9 @@ export const productSlice = createSlice({
     });
     builder.addCase(fetchCategories.fulfilled, (state, action) => {
       state.categories = action.payload;
+    });
+    builder.addCase(searchProducts.fulfilled, (state, action) => {
+      state.products = action.payload;
     });
   },
 });
