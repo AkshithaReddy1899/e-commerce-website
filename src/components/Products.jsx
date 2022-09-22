@@ -17,17 +17,29 @@ const Products = () => {
 		dispatch(searchProducts(search));
 	}
 
+	// Filter Categories
+	const handleChange = (e) => {
+		e.preventDefault();
+		dispatch(searchCategories(e.target.value));
+	}
+
 	const products = useSelector((state) => state.productReducer.products.products);
 	const categories = useSelector((state) => state.productReducer.categories);
 
 	console.log(products);
-	console.log(categories);
 
 	return (
 	  <div>
       <div className="text-center flex justify-between items-center bg-slate-100 h-16 px-12">
         <div>
-          Filter
+				<select onChange={(e) => { handleChange(e); }}>
+            <option value="">--select--</option>
+            {
+              categories.map((obj) => (
+                <option key={obj}>{obj}</option>
+              ))
+            }
+          </select>
         </div>
         <div className="flex justify-between items-center bg-slate-300">
           <div>
