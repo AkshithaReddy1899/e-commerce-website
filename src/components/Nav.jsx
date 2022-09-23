@@ -6,7 +6,7 @@ const Nav = () => {
     <div className="bg-slate-800 text-white flex justify-between items-center h-10 px-28">
       <p>E-Commerce</p>
       <ul className="flex flex-row">
-        <li className="mx-4"><Link to="/products">Products</Link></li>
+        <li className="mx-4"><Link to="/">Products</Link></li>
         <li className="mx-4"><Link to="/checkout">Cart</Link></li>
       </ul>
     </div>
