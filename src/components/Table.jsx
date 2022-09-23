@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import DataTable from 'react-data-table-component';
 import { addToCart } from '../feature/ProductsSlice';
@@ -34,10 +33,10 @@ const Table = (products) => {
         cost: `$${item.price}`,
         stocks: (item.stock > 10) ? <p className="text-green-500 font-bold">In Stock</p> : <p className="text-red-400 font-bold">No Stock</p>,
         buy:
-  <div id={item.id} className="flex justify-center items-center flex-row">
+  <div id={item.id} className="flex justify-between items-center flex-row">
     <input type="number" name={item.title} value={quantity.name} onChange={(e) => handleChange(e)} placeholder="1" className="bg-slate-200 w-9 mx-2 text-center" />
 		<p>Cart</p>
-		<input type="checkbox" name={item.title} id={item.id} onChange={(e) => handleClick(e)} />
+		<input type="checkbox" className="m-1" name={item.title} id={item.id} onChange={(e) => handleClick(e)} />
   </div>,
       };
       data.push(obj);
@@ -73,7 +72,7 @@ const Table = (products) => {
 		];
 
 	return (
-		<div>Table
+		<div>
 			<DataTable columns={columns} data={data} pagination />
 		</div>
 	);
