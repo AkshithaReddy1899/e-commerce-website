@@ -4,12 +4,15 @@
 
 A simple desktop e-commerce site with products page and checkout build with React styled using TailwindCSS
 
-## Screenshot
-![Screenshot]()
-
 ## Live demo
 
-[Link]()
+[Link](https://quiet-croissant-fba962.netlify.app/)
+
+## Screenshot
+
+![products-md](https://user-images.githubusercontent.com/70577783/191893121-a3915c03-5893-4194-9706-f035954e61ee.jpg)
+![checkout-md](https://user-images.githubusercontent.com/70577783/191893123-aaa3fa40-0e01-4990-b1ff-bde458fc291b.jpg)
+
 
 ## Built With
 
