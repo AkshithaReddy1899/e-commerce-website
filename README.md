@@ -39,7 +39,7 @@ A simple desktop e-commerce site with products page and checkout build with Reac
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/AkshithaReddy1899/portfolio/issues) here 😏😏.
+Feel free to check the [issues page](https://github.com/AkshithaReddy1899/e-commerce-website/issues) here 😏😏.
 
 ## Show your support
 
