@@ -17,7 +17,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Nav />
       <Routes>
         <Route path="/" element={<Products />} />
