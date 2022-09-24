@@ -1,12 +1,23 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchProducts, fetchCategories } from './feature/ProductsSlice';
 import Nav from './components/Nav';
 import Products from './components/Products';
 import Checkout from './components/Checkout';
 import ThankYou from './components/ThankYou';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+    dispatch(fetchCategories());
+  }, []);
+
   return (
-    <div className="">
+    <div>
       <Nav />
       <Routes>
         <Route path="/" element={<Products />} />

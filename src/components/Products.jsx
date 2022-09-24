@@ -1,18 +1,12 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchProducts, fetchCategories, searchProducts, searchCategories } from '../feature/ProductsSlice';
+import { searchProducts, searchCategories } from '../feature/ProductsSlice';
 import Table from './Table';
 
 const Products = () => {
 	const dispatch = useDispatch();
 	const [search, setSearch] = useState('');
-
-	useEffect(() => {
-    dispatch(fetchProducts());
-    dispatch(fetchCategories());
-  }, []);
 
 	// search Products
 	const handleClick = (e) => {
@@ -26,7 +20,7 @@ const Products = () => {
 		dispatch(searchCategories(e.target.value));
 	}
 
-	const products = useSelector((state) => state.productReducer.products.products);
+	const products = useSelector((state) => state.productReducer.products);
 	const categories = useSelector((state) => state.productReducer.categories);
 
 	return (
