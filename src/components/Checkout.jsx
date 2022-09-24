@@ -1,31 +1,30 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { cartProductQuantity } from '../feature/ProductsSlice';
 import CartTable from './CartTable';
 
 const Checkout = () => {
+	const dispatch = useDispatch();
 	const products = useSelector((state) => state.productReducer.products);
 	const cart = useSelector((state) => state.productReducer.cart);
 
 	const cartItems = products.filter((item) => cart.includes(item.id));
 	const [price, setPrice] = useState(0);
 
-	/*
-
 	const handleClick = (item, num) => {
-		const index = cart.indexOf(item);
-		const arr = cart;
-		arr[index].quantity +=num;		
-		
-		if (arr[index].quantity === 0) {
-			arr[index].quantity = 1;
+		const obj = {};
+		obj.item = item;
+		obj.num = num;
+		if (!(item.quantity === 0 && num === -1)) {
+			dispatch(cartProductQuantity(obj));
 		}
-		// handlePrice();
-	}; */
+		handlePrice();
+	};
 
 	const handlePrice = () => {
 		let total = 0;
-		cart.map((item) => total += item.price * item.quantity)
+		cartItems.map((item) => total += item.price * item.quantity)
 		setPrice(total);
 	};
 
@@ -37,7 +36,7 @@ const Checkout = () => {
 		<div className="flex justify-center items-center lg:justify-around lg:items-start px-24 py-10 flex-col lg:flex-row">
 			<div className="items-left border p-4 mr-3 my-4">
 				{
-					(cart.length > 0) ? (<CartTable data={cartItems} />) :<p className="text-2xl text-red-500 font-bold">Cart Empty. Add items</p>
+					(cart.length > 0) ? (<CartTable data={cartItems} handleClick={handleClick} handlePrice={handlePrice} />) :<p className="text-2xl text-red-500 font-bold">Cart Empty. Add items</p>
 				}
 			</div>
 			<div className="w-72 p-4 h-auto border">

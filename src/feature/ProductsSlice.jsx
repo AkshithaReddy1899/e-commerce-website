@@ -48,10 +48,7 @@ export const productSlice = createSlice({
       return { ...state, cart: [...state.cart, action.payload] }
     },
     productQuantity: (state, action) => {
-      console.log(action.payload.item.id);
-      console.log(action.payload.value);
       const index = state.products.findIndex((item) => item.id === action.payload.item.id)
-      console.log(index);
       const updatedArray = update(state, {
         products: {
           [index]: {
@@ -61,10 +58,20 @@ export const productSlice = createSlice({
       })
       return updatedArray;
     },
+    cartProductQuantity: (state, action) => {
+      const index = state.products.findIndex((item) => item.id === action.payload.item.id)
+      const updatedArray = update(state, {
+        products: {
+          [index]: {
+            quantity: {$set: state.products[index].quantity + action.payload.num}
+          }
+        }
+      })
+      return updatedArray;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
-      console.log('fetched products');
       state.products = action.payload;
     });
     builder.addCase(fetchCategories.fulfilled, (state, action) => {
@@ -79,6 +86,6 @@ export const productSlice = createSlice({
   },
 });
 
-export const { addToCart, productQuantity } = productSlice.actions;
+export const { addToCart, productQuantity, cartProductQuantity } = productSlice.actions;
 
 export default productSlice.reducer;

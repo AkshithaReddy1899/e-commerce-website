@@ -12,15 +12,12 @@ const Table = (data) => {
 	}, [data.data])
 
 	const handleChange = (e, item) => {
-		console.log('input');
 		const value = parseInt(e.target.value);
 		const obj = {}
 		obj.item = item;
 		obj.value = value;
-		console.log(obj)
 		if (e.target.value >= 1) {
 			dispatch(productQuantity(obj));
-			console.log(products);
 		}
 	};
 
@@ -60,7 +57,7 @@ const Table = (data) => {
 							<tbody>
 								{
 									products.map((item) => (
-										<tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+										<tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100" key={item.id}>
 											<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
 											  <img src={item.image} alt={item.title} className="w-14" />
 											</td>
@@ -77,7 +74,7 @@ const Table = (data) => {
 												${item.price}
 											</td>
 											<td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-											<div id={item.id} className="flex justify-between items-center flex-row">
+											<div className="flex justify-between items-center flex-row">
 												<input type="number" name={item.title} defaultValue={item.quantity} onChange={ (e) => handleChange(e, item) } className="bg-slate-200 w-9 mx-2 text-center" />
 												<p>Cart</p>
 												<input type="checkbox" className="m-1" id={item.id} name={item.title} onClick={ (e) => handleClick(e) } />
