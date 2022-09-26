@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { searchProducts, searchCategories } from '../feature/ProductsSlice';
+import { fetchProducts, searchProducts, searchCategories } from '../feature/ProductsSlice';
 import Table from './Table';
 
 const Products = () => {
@@ -14,6 +14,11 @@ const Products = () => {
 		dispatch(searchProducts(search));
 	}
 
+  const handleReset = (e) => {
+    e.preventDefault();
+    dispatch(fetchProducts());
+  }
+
 	// Filter Categories
 	const handleChange = (e) => {
 		e.preventDefault();
@@ -25,15 +30,19 @@ const Products = () => {
 
 	return (
     <div>
-      <div className="bg-slate-100 flex justify-between items-center px-20 py-5">
-        <select className="block appearance-none w-32 bg-gray-200 border border-gray-100 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={(e) => { handleChange(e); }}>
-          <option value="">--select--</option>
-          {
-            categories.map((obj) => (
-              <option key={obj}>{obj}</option>
-            ))
-          }
-        </select>
+      <div className="bg-slate-100 flex justify-between items-center px-16 py-5">
+        <div className="flex justify-center items-center">
+          <select className="block appearance-none w-32 bg-gray-200 border border-gray-100 text-gray-700 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onChange={(e) => { handleChange(e); }}>
+            <option value="">--select--</option>
+            {
+              categories.map((obj) => (
+                <option key={obj}>{obj}</option>
+              ))
+            }
+          </select>
+          <button type="button" className="border mx-2 bg-gray-600 px-2 rounded text-white pb-1" onClick={(e) => {handleReset(e)}}>reset</button>
+        </div>
+        <div id="reset-button">&nbsp;</div>
         <div className="flex justify-center items-center">
           <div>
             <input type="text" className="shadow bg-gray-100 hover:bg-white appearance-none border border-slate-300 rounded w-32 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="search" onChange={(e) => { setSearch((e.target.value)); }} />
