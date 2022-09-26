@@ -2,10 +2,9 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import update from 'react-addons-update';
 
-export const fetchProducts = createAsyncThunk('E-COMMERCE/FETCH-PRODUCTS', async () => {
-  const response = await axios.get('https://dummyjson.com/products');
-  const data = [];
-  Object.entries(response.data.products).forEach((item) => {
+const sortData = (data) => {
+  const newData = [];
+  Object.entries(data).forEach((item) => {
     const newObj = {}
     newObj.id = item[1].id;
     newObj.name = item[1].title;
@@ -14,9 +13,14 @@ export const fetchProducts = createAsyncThunk('E-COMMERCE/FETCH-PRODUCTS', async
     newObj.price = item[1].price;
     newObj.image = item[1].images[0];
     newObj.quantity = 1;
-    data.push(newObj);
+    newData.push(newObj);
   });
-  return data;
+  return newData;
+}
+
+export const fetchProducts = createAsyncThunk('E-COMMERCE/FETCH-PRODUCTS', async () => {
+  const response = await axios.get('https://dummyjson.com/products');
+  return sortData(response.data.products);
 });
 
 export const fetchCategories = createAsyncThunk('E-COMMERCE/FETCH_CATEGORIES', async () => {
@@ -26,12 +30,12 @@ export const fetchCategories = createAsyncThunk('E-COMMERCE/FETCH_CATEGORIES', a
 
 export const searchProducts = createAsyncThunk('E-COMMERCE/SEARCH_PRODUCTS', async (search) => {
   const response = await axios.get(`https://dummyjson.com/products/search?q=${search}`);
-  return response.data;
+  return sortData(response.data.products);
 });
 
 export const searchCategories = createAsyncThunk('E-COMMERCE/PRODUCTS_BY_CATEGORY', async (value) => {
   const response = await axios.get(`https://dummyjson.com/products/category/${value}`);
-  return response.data;
+  return(sortData(response.data.products));
 });
 
 export const productSlice = createSlice({

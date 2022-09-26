@@ -73,11 +73,13 @@ const Table = (data) => {
 										${item.price}
 									</td>
 									<td className="text-sm text-gray-900 text-center font-light px-6 py-4 w-40">
-									<div className="flex justify-center items-center flex-row">
-										<input type="number" name={item.title} defaultValue={item.quantity} onChange={ (e) => handleChange(e, item) } className="bg-slate-200 w-9 mx-2 text-center" />
-										<p>Cart</p>
-										<input type="checkbox" className="m-1" id={item.id} name={item.title} onClick={ (e) => handleClick(e) } />
-									</div>
+									  <div className="flex justify-center items-center flex-row disabled">
+											{
+												(item.stock > 10) ? <><input type="number" name={item.title} defaultValue={item.quantity} onChange={ (e) => handleChange(e, item) } className="bg-slate-200 w-9 mx-2 text-center" />
+												<p>Cart</p>
+												<input type="checkbox" className="m-1" id={item.id} name={item.title} onClick={ (e) => handleClick(e) } /></> : <p>Try again later...</p>
+											}
+									  </div>
 									</td>
 								</tr>
 							))
