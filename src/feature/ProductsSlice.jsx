@@ -19,7 +19,12 @@ const sortData = (data) => {
 }
 
 export const fetchProducts = createAsyncThunk('E-COMMERCE/FETCH-PRODUCTS', async () => {
-  const response = await axios.get('https://dummyjson.com/products');
+  const headers = {
+    'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInVzZXJuYW1lIjoia21pbmNoZWxsZSIsImVtYWlsIjoia21pbmNoZWxsZUBxcS5jb20iLCJmaXJzdE5hbWUiOiJKZWFubmUiLCJsYXN0TmFtZSI6IkhhbHZvcnNvbiIsImdlbmRlciI6ImZlbWFsZSIsImltYWdlIjoiaHR0cHM6Ly9yb2JvaGFzaC5vcmcvYXV0cXVpYXV0LnBuZyIsImlhdCI6MTY2NDI4NjI4OSwiZXhwIjoxNjY0Mjg5ODg5fQ.RLgNR88Fq0KDSvTGWbspKCQ86FIFgId5YTLVJxMDpEQ',
+    'Content-Type': 'application/json'
+  };
+  const response = await axios.get('https://dummyjson.com/products/?limit=100', headers);
+  console.log(response.data);
   return sortData(response.data.products);
 });
 

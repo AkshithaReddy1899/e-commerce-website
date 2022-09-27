@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { cartProductQuantity } from '../feature/ProductsSlice';
+import { cartProductQuantity, fetchProducts } from '../feature/ProductsSlice';
 import CartTable from './CartTable';
 
 const Checkout = () => {
@@ -10,7 +10,7 @@ const Checkout = () => {
 	const products = useSelector((state) => state.productReducer.products);
 	const cart = useSelector((state) => state.productReducer.cart);
 
-	const cartItems = products.filter((item) => cart.includes(item.id));
+	let cartItems = products.filter((item) => cart.includes(item.id));
 	const [price, setPrice] = useState(0);
 
 	const handleClick = (item, num) => {
@@ -30,6 +30,7 @@ const Checkout = () => {
 	};
 
 	useEffect(() => {
+		dispatch(fetchProducts());
 		handlePrice();
 	}, []);
 
